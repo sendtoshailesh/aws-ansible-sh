@@ -197,6 +197,26 @@ Part G:
 ```mermaid
 
 ```
+#### **Additional Considerations**
+
+1. **Security:**  
+     
+   - Ensure **IAM Role Policies** follow the least privilege principle.  
+   - Avoid hardcoding credentials; use IAM roles and temporary credentials.
+
+   
+
+2. **Error Handling and Testing:**  
+     
+   - Test the Ansible playbook with a few EC2 instances before full deployment.  
+   - Implement error handling and logging for all playbook steps.
+
+   
+
+3. **Documentation:**  
+     
+   - Include a README file in the GitHub repository with setup instructions and details about the playbook and architecture.
+
 
 ---
 
