@@ -96,7 +96,7 @@ graph TD
 Part D:
 
 
-![basic architecture ](diagrams/basic-arch.png)
+![basic architecture ](diagrams/multi-account.png)
 
 
 Part F:
