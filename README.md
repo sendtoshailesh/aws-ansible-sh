@@ -38,13 +38,29 @@ The architecture centralizes access and management using **AWS Organizations** a
 
 Part A: Considering only 3 EC2 instance each dstributed across different AWS account, following will be the flow of control.
 
-#### **1\. Solution Design**
+#### **3\. Key Components of the Solution**
 
-**Overview:** To address the problem, the solution will leverage:
+1. **Centralized Access and Management:**  
+     
+   - Set up **AWS Organizations** to link all accounts.  
+   - Use a **Management Account** to assume roles in other accounts using IAM policies.  
+   - Enable **AWS Config** and **CloudTrail** for auditing and governance.
 
-- **Centralized Access and Management** using **AWS Organizations** and **IAM Roles** with cross-account access.  
-- **Data Aggregation** using **AWS S3** for central storage and **AWS Athena** for query and analysis.  
-- **Scaling** by adhering to modular design principles and leveraging AWS native tools.
+   
+
+2. **Data Aggregation:**  
+     
+   - EC2 instances send disk utilization metrics (collected via Ansible) to **S3** in the Management Account.  
+   - Configure **S3 Lifecycle Policies** for cost-effective storage.  
+   - Use **AWS Athena** to run queries and generate reports.
+
+   
+
+3. **Scaling for Future Accounts:**  
+     
+   - Automate the inclusion of new accounts by extending AWS Organizations and updating IAM roles.  
+   - Design the Ansible playbook to dynamically retrieve account details and EC2 inventory using AWS CLI.
+
 
 ---
 Part B: 
