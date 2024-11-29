@@ -38,6 +38,27 @@ The architecture centralizes access and management using **AWS Organizations** a
 
 Part A: Considering only 3 EC2 instance each dstributed across different AWS account, following will be the flow of control.
 
+#### **1\. Solution Design**
+
+**Overview:** To address the problem, the solution will leverage:
+
+- **Centralized Access and Management** using **AWS Organizations** and **IAM Roles** with cross-account access.  
+- **Data Aggregation** using **AWS S3** for central storage and **AWS Athena** for query and analysis.  
+- **Scaling** by adhering to modular design principles and leveraging AWS native tools.
+
+---
+
+#### **2\. High-Level Architectural Diagram**
+
+The architectural diagram includes the following components:
+
+- **AWS Organizations** for centralized account management.  
+- **IAM Roles** with policies for secure cross-account access.  
+- **Ansible** for metric collection and automation.  
+- **AWS S3** for centralized data storage.  
+- **AWS Athena** for querying aggregated data.  
+- **Amazon QuickSight** (optional) for visualizing disk utilization metrics.
+
 ```mermaid
 graph TD
   A[AWS Organizations] --> B(Management Account)
