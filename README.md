@@ -145,7 +145,7 @@ To aggregate collected data into a single format:
 2. **Data Query with Athena:**  
      
    - Create a table in Athena to read and query data from S3:  
-      ```sql 
+   ```sql 
      CREATE EXTERNAL TABLE IF NOT EXISTS disk\_utilization (  
        account\_id STRING,  
        instance\_id STRING,  
@@ -156,7 +156,7 @@ To aggregate collected data into a single format:
        utilization\_percentage STRING  
      )  
      LOCATION 's3://central-metrics-bucket/metrics/';  
-       ```
+   ```
       
    - Run queries to aggregate data:  
        
