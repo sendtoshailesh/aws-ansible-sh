@@ -1,9 +1,9 @@
 # ***Case study : Multi-Account AWS EC2 Disk Utilization Monitoring*** 
-
-**Background:**
+```
+Background:
 You are a Solutions architect at a large enterprise that utilizes AWS cloud services. The company has grown through acquisitions and now manages 3 separate AWS accounts, each containing numerous EC2 instances. The CTO has expressed concerns about potential disk space issues across these instances and wants a comprehensive solution to monitor disk utilization.
 
-**Assignment:**
+Assignment:
 
 Company is internally using a configuration management tool (Ansible). Before investing into other tools, the company has decided to use Ansible to perform the required metric collection.
 
@@ -16,7 +16,7 @@ Design and outline a solution to fetch and report disk utilization from all EC2 
 3\. How would your solution scale if the company acquires more companies and AWS accounts in the future?
 
 						
-**Deliverables :**
+Deliverables :
 
 1\. Provide a high-level architectural diagram of your proposed solution. 
 
@@ -24,7 +24,7 @@ Design and outline a solution to fetch and report disk utilization from all EC2 
 
 3\.  Summarize the various component involved in the process 
 
-
+```
 
 ### Centralized Access and Management of Multi-Account AWS EC2 Disk Utilization Monitoring
 
@@ -38,7 +38,7 @@ The architecture centralizes access and management using **AWS Organizations** a
 
 Part A: Considering only 3 EC2 instance each dstributed across different AWS account, following will be the flow of control.
 
-#### **3\. Key Components of the Solution**#### **3\. Components of the Solution**
+#### Key Components of the Solution**#### **3\. Components of the Solution
 
 1. **AWS Organizations:**  
      
@@ -81,12 +81,8 @@ Part A: Considering only 3 EC2 instance each dstributed across different AWS acc
      
    - All S3 uploads use IAM roles to avoid hardcoding credentials.  
    - Data in S3 is encrypted using server-side encryption (SSE).
-
-
-
----
-Part B: 
-
+  
+-----
 
 
 ```mermaid
@@ -107,8 +103,8 @@ graph TD
 
 
 
-Part C:
-#### **4\. Aggregating Data into a Single Format**
+
+#### Aggregating Data into a Single Format**
 
 To aggregate collected data into a single format:
 
@@ -116,21 +112,21 @@ To aggregate collected data into a single format:
      
    - Organize data in a structured format in the S3 bucket:  
       ```bash 
-     /account-id/instance-id/disk\_usage.txt
+     /account-id/instance-id/disk_usage.txt
       ```
      
 2. **Data Query with Athena:**  
      
    - Create a table in Athena to read and query data from S3:  
    ```sql 
-     CREATE EXTERNAL TABLE IF NOT EXISTS disk\_utilization (  
-       account\_id STRING,  
-       instance\_id STRING,  
-       disk\_partition STRING,  
-       total\_space STRING,  
-       used\_space STRING,  
-       available\_space STRING,  
-       utilization\_percentage STRING  
+     CREATE EXTERNAL TABLE IF NOT EXISTS disk_utilization (  
+       account_id STRING,  
+       instance_id STRING,  
+       disk_partition STRING,  
+       total_space STRING,  
+       used_space STRING,  
+       available_space STRING,  
+       utilization_percentage STRING  
      )  
      LOCATION 's3://central-metrics-bucket/metrics/';  
    ```
@@ -138,9 +134,9 @@ To aggregate collected data into a single format:
    - Run queries to aggregate data:  
        
    ```sql
-     SELECT account\_id, instance\_id, utilization\_percentage  
-     FROM disk\_utilization  
-     WHERE utilization\_percentage \> 80;
+     SELECT account_id, instance_id, utilization_percentage  
+     FROM disk_utilization  
+     WHERE utilization_percentage > 80;
    ```
      
 3. **Visualization:**  
@@ -172,8 +168,6 @@ graph TD
  
 ```
 
-
-Part D:
 
 
 ```mermaid
@@ -219,11 +213,6 @@ graph TD
   style VISUAL fill:#FADBD8,stroke:#E74C3C,stroke-width:2px,color:black
 ```
 
-Part G:
-
-```mermaid
-
-```
 #### **Additional Considerations**
 
 1. **Security:**  
@@ -239,10 +228,6 @@ Part G:
    - Implement error handling and logging for all playbook steps.
 
    
-
-3. **Documentation:**  
-     
-   - Include a README file in the GitHub repository with setup instructions and details about the playbook and architecture.
 
 
 ---
@@ -300,6 +285,8 @@ Part G:
 ---
 
 ### **3. Centralized Access and Management**
+
+
 
 #### **Using AWS Organizations**
 1. **Centralized Management with AWS Organizations:**
