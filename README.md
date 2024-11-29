@@ -138,42 +138,33 @@ To aggregate collected data into a single format:
 1. **Data Upload to S3:**  
      
    - Organize data in a structured format in the S3 bucket:  
-       
+      ```bash 
      /account-id/instance-id/disk\_usage.txt
-
+      ```
      
 2. **Data Query with Athena:**  
      
    - Create a table in Athena to read and query data from S3:  
-       
+      ```sql 
      CREATE EXTERNAL TABLE IF NOT EXISTS disk\_utilization (  
-       
        account\_id STRING,  
-       
        instance\_id STRING,  
-       
        disk\_partition STRING,  
-       
        total\_space STRING,  
-       
        used\_space STRING,  
-       
        available\_space STRING,  
-       
        utilization\_percentage STRING  
-       
      )  
-       
      LOCATION 's3://central-metrics-bucket/metrics/';  
-       
+       ```
+      
    - Run queries to aggregate data:  
        
+   ```sql
      SELECT account\_id, instance\_id, utilization\_percentage  
-       
      FROM disk\_utilization  
-       
      WHERE utilization\_percentage \> 80;
-
+   ```
      
 3. **Visualization:**  
      
@@ -379,7 +370,7 @@ Part G:
 #### **Centralized Data Aggregation**
 1. Collected metrics are uploaded to a centralized **S3 Bucket** in the Management Account.
    - Data is organized using prefixes:
-     ```
+     ```bash
      /child-account-id/instance-id/disk_usage.txt
      ```
 
@@ -424,7 +415,7 @@ Part G:
    * Assign the Management Account permissions to assume these roles.
 
 Example IAM Role Policy:
-```
+```json
  {  
   "Version": "2012-10-17",  
   "Statement": \[  
@@ -453,7 +444,7 @@ Example IAM Role Policy:
    * Dynamically update the **inventory.yml** file to include new accounts and EC2 instances.
 
 Example inventory file:  
-```
+```ansible
  all:  
   children:  
     account\_1:  
