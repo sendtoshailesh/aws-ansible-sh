@@ -36,9 +36,8 @@ This document provides a comprehensive solution to centralize access and managem
 
 The architecture centralizes access and management using **AWS Organizations** and **IAM Roles**. It ensures secure and scalable data aggregation from multiple AWS accounts.
 
-Part A: Considering only 3 EC2 instance each dstributed across different AWS account, following will be the flow of control.
 
-#### Key Components of the Solution**#### **3\. Components of the Solution
+#### Components of the Solution
 
 1. **AWS Organizations:**  
      
