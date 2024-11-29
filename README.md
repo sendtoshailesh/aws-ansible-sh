@@ -109,16 +109,23 @@ graph TD
 
 
 Part C:
-#### **2\. High-Level Architectural Diagram**
+1. **Centralized Data Aggregation:**  
+     
+   - Collected metrics from EC2 instances across multiple AWS accounts are stored in a central **AWS S3 bucket** in the Management Account.  
+   - Data from S3 is queried using **AWS Athena** for on-demand analytics.
 
-The architectural diagram includes the following components:
+   
 
-- **AWS Organizations** for centralized account management.  
-- **IAM Roles** with policies for secure cross-account access.  
-- **Ansible** for metric collection and automation.  
-- **AWS S3** for centralized data storage.  
-- **AWS Athena** for querying aggregated data.  
-- **Amazon QuickSight** (optional) for visualizing disk utilization metrics.
+2. **Scalable Multi-Account Access:**  
+     
+   - **AWS Organizations** manages multiple accounts, and **IAM roles** enable cross-account access.  
+   - **Ansible Playbook** is used to automate disk utilization data collection.
+
+   
+
+3. **Visualization and Reporting:**  
+     
+   - Aggregated data can be visualized using **Amazon QuickSight** or exported for further analysis.
 
 
 ```mermaid
