@@ -230,10 +230,12 @@ Part G:
 ### **2. Ansible Playbook**
 
 #### **Playbook Overview**
-The playbook:
-1. Automates SSH-based access to EC2 instances across accounts.
-2. Fetches disk utilization metrics.
-3. Uploads metrics to a centralized S3 bucket in the Management Account.
+**Steps in the Playbook:**
+
+1. **Install AWS CLI:** Ensures the managed nodes have the necessary tool to interact with AWS services.  
+2. **Fetch Disk Utilization:** Runs the `df` command to capture disk metrics and stores the output in a temporary file.  
+3. **Copy Locally:** Copies the metrics from the managed nodes to the control node for review.  
+4. **Upload to S3:** Pushes the metrics to a centralized S3 bucket in the Management Account for aggregation.
 
 #### **Playbook: `aws-disk-monitoring/disk_monitoring.yml`**
 
