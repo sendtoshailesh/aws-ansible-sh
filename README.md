@@ -107,29 +107,6 @@ graph TD
 
 
 
-
-
-```mermaid
-graph TD
-  A[AWS Organizations] --> B(Management Account)
-  B -->|Assume IAM Role| C[Child Account 1]
-  B -->|Assume IAM Role| D[Child Account 2]
-  B -->|Assume IAM Role| E[Child Account 3]
-  B -->|Add New IAM Role| F[Newly Acquired Account]
-  C -->|Ansible Executes| G[EC2 Instances]
-  D -->|Ansible Executes| H[EC2 Instances]
-  E -->|Ansible Executes| I[EC2 Instances]
-  F -->|Ansible Executes| J[EC2 Instances]
-  G -->|Push Metrics| K[S3 Central Bucket]
-  H -->|Push Metrics| K[S3 Central Bucket]
-  I -->|Push Metrics| K[S3 Central Bucket]
-  J -->|Push Metrics| K[S3 Central Bucket]
-  K --> L[AWS Athena]
-  L --> M[Amazon QuickSight]
-```
-
-
-
 Part C:
 #### **4\. Aggregating Data into a Single Format**
 
@@ -414,11 +391,35 @@ Part G:
    * For each new account, create an **IAM Role** to allow cross-account access.  
    * Assign the Management Account permissions to assume these roles.
 
+
+
+
+```mermaid
+graph TD
+  A[AWS Organizations] --> B(Management Account)
+  B -->|Assume IAM Role| C[Child Account 1]
+  B -->|Assume IAM Role| D[Child Account 2]
+  B -->|Assume IAM Role| E[Child Account 3]
+  B -->|Add New IAM Role| F[Newly Acquired Account]
+  C -->|Ansible Executes| G[EC2 Instances]
+  D -->|Ansible Executes| H[EC2 Instances]
+  E -->|Ansible Executes| I[EC2 Instances]
+  F -->|Ansible Executes| J[EC2 Instances]
+  G -->|Push Metrics| K[S3 Central Bucket]
+  H -->|Push Metrics| K[S3 Central Bucket]
+  I -->|Push Metrics| K[S3 Central Bucket]
+  J -->|Push Metrics| K[S3 Central Bucket]
+  K --> L[AWS Athena]
+  L --> M[Amazon QuickSight]
+```
+
+
+
 Example IAM Role Policy:
 ```json
  {  
   "Version": "2012-10-17",  
-  "Statement": \[  
+  "Statement": [  
     {  
       "Effect": "Allow",  
       "Principal": {  
@@ -428,14 +429,14 @@ Example IAM Role Policy:
     },  
     {  
       "Effect": "Allow",  
-      "Action": \[  
+      "Action": [  
         "ec2:DescribeInstances",  
         "ec2:DescribeVolumes",  
         "s3:PutObject"  
-      \],  
-      "Resource": "\*"  
+      ],  
+      "Resource": "*"  
     }  
-  \]  
+  ]  
 }
 ```
 3.   
@@ -447,20 +448,20 @@ Example inventory file:
 ```ansible
  all:  
   children:  
-    account\_1:  
+    account_1:  
       hosts:  
-        ec2-1: { ansible\_host: 192.168.1.10, ansible\_user: ec2-user }  
-        ec2-2: { ansible\_host: 192.168.1.11, ansible\_user: ec2-user }  
-    account\_2:  
+        ec2-1: { ansible\_host: 192.168.1.10, ansible_user: ec2-user }  
+        ec2-2: { ansible\_host: 192.168.1.11, ansible_user: ec2-user }  
+    account_2:  
       hosts:  
-        ec2-3: { ansible\_host: 192.168.2.10, ansible\_user: ec2-user }
+        ec2-3: { ansible\_host: 192.168.2.10, ansible_user: ec2-user }
 ```
 *   
 5. **S3 Bucket Structure:**
 
 Organize metrics by account and instance in the **S3 central bucket**:  
  ```
-/account-id/instance-id/disk\_usage.txt
+/account-id/instance-id/disk_usage.txt
 ```
 *   
 6. **Athena for Querying:**
@@ -469,9 +470,9 @@ Organize metrics by account and instance in the **S3 central bucket**:
 
 Example query:  
 ```sql
- SELECT account\_id, instance\_id, utilization\_percentage  
-FROM disk\_utilization  
-WHERE utilization\_percentage \> 80;
+ SELECT account_id, instance_id, utilization_percentage  
+FROM disk_utilization  
+WHERE utilization_percentage \> 80;
 ```
 *   
 7. **Visualization with QuickSight:**
@@ -489,7 +490,7 @@ WHERE utilization\_percentage \> 80;
 
 Run the playbook:  
 ```
- ansible-playbook \-i inventory.yml disk\_utilization\_monitoring.yml
+ ansible-playbook -i inventory.yml disk_utilization_monitoring.yml
 ```
 4. 
 
