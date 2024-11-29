@@ -94,6 +94,7 @@ graph TD
 
 
 Part D:
+![basic architecture ](diagrams/basic-arch.png)
 
 
 Part F:
