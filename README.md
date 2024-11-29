@@ -485,6 +485,25 @@ WHERE utilization\_percentage \> 80;
    * Dashboards dynamically display data as new accounts and metrics are added.
 
 
+### **Scalability Example**
+
+#### **Adding a New Account**
+
+1. Add the new account to **AWS Organizations**.  
+2. Configure an IAM Role in the new account with the necessary permissions.  
+3. Update the Ansible inventory with the new account’s EC2 instances.
+
+Run the playbook:  
+ ansible-playbook \-i inventory.yml disk\_utilization\_monitoring.yml
+
+4. 
+
+#### **Data Aggregation and Reporting**
+
+* Metrics from the new account are automatically uploaded to the S3 bucket.  
+* Athena queries dynamically include new data for reporting.  
+* Dashboards in QuickSight automatically refresh with updated data.
+
 ### **5. Summary of Components**
 
 1. **AWS Organizations:**
