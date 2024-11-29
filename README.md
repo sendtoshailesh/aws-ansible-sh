@@ -167,51 +167,6 @@ graph TD
  
 ```
 
-
-
-```mermaid
-graph TD
-  %% Root Account and Organization Setup
-  ROOT[Root Account]:::root --> M[Management Account<br>Ansible Automation]:::management
-  ROOT --> OU[Organizational Unit OU]:::ou
-  OU --> CA1[Child Account 1]:::child
-  OU --> CA2[Child Account 2]:::child
-  OU --> CA3[Child Account 3]:::child
-
-  %% Management Account Automation
-  M -->|Runs Ansible Automation| EC2_ANSIBLE[Ansible EC2 Instance<br>Metric Collection]:::ansible
-
-  %% Child Account EC2 and EBS Setup
-  CA1 --> EC1[EC2 Instance 1<br>Disk Utilization: 40%]:::ec2 --> EBS1[EBS Volume 1<br>40% Utilization]:::ebs
-  CA2 --> EC2[EC2 Instance 2<br>Disk Utilization: 70%]:::ec2 --> EBS2[EBS Volume 2<br>70% Utilization]:::ebs
-  CA3 --> EC3[EC2 Instance 3<br>Disk Utilization: 90%]:::ec2 --> EBS3[EBS Volume 3<br>90% Utilization]:::ebs
-
-  %% Centralized Storage in Management Account
-  EC2_ANSIBLE -->|Captures Metrics| S3[S3 Central Bucket<br>Disk Metrics]:::s3
-
-  %% Data Analytics and Visualization
-  S3 -->|Query Metrics| ATHENA[AWS Athena<br>Query Engine]:::athena
-  ATHENA -->|Visualize Data| VISUAL[Amazon QuickSight/Power BI<br>Dashboards]:::visualization
-
-  %% Styles for Clarity
-  style ROOT fill:#F5CBA7,stroke:#DC7633,stroke-width:2px,color:black
-  style M fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px,color:black
-  style OU fill:#D5F5E3,stroke:#27AE60,stroke-width:2px,color:black
-  style CA1 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px,color:black
-  style CA2 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px,color:black
-  style CA3 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px,color:black
-  style EC1 fill:#FEF9E7,stroke:#F4D03F,stroke-width:2px,color:black
-  style EC2 fill:#FEF9E7,stroke:#F4D03F,stroke-width:2px,color:black
-  style EC3 fill:#FEF9E7,stroke:#F4D03F,stroke-width:2px,color:black
-  style EBS1 fill:#FCF3CF,stroke:#F1C40F,stroke-width:2px,color:black
-  style EBS2 fill:#FCF3CF,stroke:#F1C40F,stroke-width:2px,color:black
-  style EBS3 fill:#FCF3CF,stroke:#F1C40F,stroke-width:2px,color:black
-  style EC2_ANSIBLE fill:#D6EAF8,stroke:#5DADE2,stroke-width:2px,color:black
-  style S3 fill:#D5F5E3,stroke:#27AE60,stroke-width:2px,color:black
-  style ATHENA fill:#FCF3CF,stroke:#F4D03F,stroke-width:2px,color:black
-  style VISUAL fill:#FADBD8,stroke:#E74C3C,stroke-width:2px,color:black
-```
-
 #### **Additional Considerations**
 
 1. **Security:**  
@@ -297,6 +252,53 @@ graph TD
    - Create **IAM Roles** in each Child Account that the Management Account can assume.
    - Roles include permissions for EC2 instance access and S3 uploads.
 
+  
+
+```mermaid
+graph TD
+  %% Root Account and Organization Setup
+  ROOT[Root Account]:::root --> M[Management Account<br>Ansible Automation]:::management
+  ROOT --> OU[Organizational Unit OU]:::ou
+  OU --> CA1[Child Account 1]:::child
+  OU --> CA2[Child Account 2]:::child
+  OU --> CA3[Child Account 3]:::child
+
+  %% Management Account Automation
+  M -->|Runs Ansible Automation| EC2_ANSIBLE[Ansible EC2 Instance<br>Metric Collection]:::ansible
+
+  %% Child Account EC2 and EBS Setup
+  CA1 --> EC1[EC2 Instance 1<br>Disk Utilization: 40%]:::ec2 --> EBS1[EBS Volume 1<br>40% Utilization]:::ebs
+  CA2 --> EC2[EC2 Instance 2<br>Disk Utilization: 70%]:::ec2 --> EBS2[EBS Volume 2<br>70% Utilization]:::ebs
+  CA3 --> EC3[EC2 Instance 3<br>Disk Utilization: 90%]:::ec2 --> EBS3[EBS Volume 3<br>90% Utilization]:::ebs
+
+  %% Centralized Storage in Management Account
+  EC2_ANSIBLE -->|Captures Metrics| S3[S3 Central Bucket<br>Disk Metrics]:::s3
+
+  %% Data Analytics and Visualization
+  S3 -->|Query Metrics| ATHENA[AWS Athena<br>Query Engine]:::athena
+  ATHENA -->|Visualize Data| VISUAL[Amazon QuickSight/Power BI<br>Dashboards]:::visualization
+
+  %% Styles for Clarity
+  style ROOT fill:#F5CBA7,stroke:#DC7633,stroke-width:2px,color:black
+  style M fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px,color:black
+  style OU fill:#D5F5E3,stroke:#27AE60,stroke-width:2px,color:black
+  style CA1 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px,color:black
+  style CA2 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px,color:black
+  style CA3 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px,color:black
+  style EC1 fill:#FEF9E7,stroke:#F4D03F,stroke-width:2px,color:black
+  style EC2 fill:#FEF9E7,stroke:#F4D03F,stroke-width:2px,color:black
+  style EC3 fill:#FEF9E7,stroke:#F4D03F,stroke-width:2px,color:black
+  style EBS1 fill:#FCF3CF,stroke:#F1C40F,stroke-width:2px,color:black
+  style EBS2 fill:#FCF3CF,stroke:#F1C40F,stroke-width:2px,color:black
+  style EBS3 fill:#FCF3CF,stroke:#F1C40F,stroke-width:2px,color:black
+  style EC2_ANSIBLE fill:#D6EAF8,stroke:#5DADE2,stroke-width:2px,color:black
+  style S3 fill:#D5F5E3,stroke:#27AE60,stroke-width:2px,color:black
+  style ATHENA fill:#FCF3CF,stroke:#F4D03F,stroke-width:2px,color:black
+  style VISUAL fill:#FADBD8,stroke:#E74C3C,stroke-width:2px,color:black
+```
+
+
+
 3. **Example IAM Role Policy (Child Account):**
    ```json
    {
@@ -323,7 +325,7 @@ graph TD
    }
    ```
 
-4. **Security Best Practices:**
+5. **Security Best Practices:**
    - Enforce MFA for role assumption.
    - Enable CloudTrail and AWS Config for monitoring access and compliance.
 
