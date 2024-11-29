@@ -410,6 +410,81 @@ Part G:
 
 ---
 
+### **3\. Scalability Summary**
+
+#### **Scaling Approach**
+
+1. **AWS Organizations:**
+
+   * Add newly acquired accounts to **AWS Organizations** for centralized governance.  
+   * Enable consolidated billing and access control through Service Control Policies (SCPs).  
+2. **IAM Roles:**
+
+   * For each new account, create an **IAM Role** to allow cross-account access.  
+   * Assign the Management Account permissions to assume these roles.
+
+Example IAM Role Policy:
+
+ {  
+  "Version": "2012-10-17",  
+  "Statement": \[  
+    {  
+      "Effect": "Allow",  
+      "Principal": {  
+        "AWS": "arn:aws:iam::MANAGEMENT\_ACCOUNT\_ID:root"  
+      },  
+      "Action": "sts:AssumeRole"  
+    },  
+    {  
+      "Effect": "Allow",  
+      "Action": \[  
+        "ec2:DescribeInstances",  
+        "ec2:DescribeVolumes",  
+        "s3:PutObject"  
+      \],  
+      "Resource": "\*"  
+    }  
+  \]  
+}
+
+3.   
+4. **Ansible Inventory:**
+
+   * Dynamically update the **inventory.yml** file to include new accounts and EC2 instances.
+
+Example inventory file:  
+ all:  
+  children:  
+    account\_1:  
+      hosts:  
+        ec2-1: { ansible\_host: 192.168.1.10, ansible\_user: ec2-user }  
+        ec2-2: { ansible\_host: 192.168.1.11, ansible\_user: ec2-user }  
+    account\_2:  
+      hosts:  
+        ec2-3: { ansible\_host: 192.168.2.10, ansible\_user: ec2-user }
+
+*   
+5. **S3 Bucket Structure:**
+
+Organize metrics by account and instance in the **S3 central bucket**:  
+ /account-id/instance-id/disk\_usage.txt
+
+*   
+6. **Athena for Querying:**
+
+   * Athena queries automatically adapt as new data is uploaded.
+
+Example query:  
+ SELECT account\_id, instance\_id, utilization\_percentage  
+FROM disk\_utilization  
+WHERE utilization\_percentage \> 80;
+
+*   
+7. **Visualization with QuickSight:**
+
+   * Dashboards dynamically display data as new accounts and metrics are added.
+
+
 ### **5. Summary of Components**
 
 1. **AWS Organizations:**
