@@ -9,20 +9,20 @@ Company is internally using a configuration management tool (Ansible). Before in
 
 Design and outline a solution to fetch and report disk utilization from all EC2 instances across the 3 AWS accounts. Your solution should address the following points:
 
-1\. How would you centralize access and management of the 3 AWS accounts?
+1. How would you centralize access and management of the 3 AWS accounts?
 
-2\. How would you aggregate the collected data from all accounts into a single, easily digestible format?
+2. How would you aggregate the collected data from all accounts into a single, easily digestible format?
 
-3\. How would your solution scale if the company acquires more companies and AWS accounts in the future?
+3. How would your solution scale if the company acquires more companies and AWS accounts in the future?
 
 						
 Deliverables :
 
-1\. Provide a high-level architectural diagram of your proposed solution. 
+1. Provide a high-level architectural diagram of your proposed solution. 
 
-2\.  Provide the ansible playbook
+2.  Provide the ansible playbook
 
-3\.  Summarize the various component involved in the process 
+3.  Summarize the various component involved in the process 
 
 ```
 
