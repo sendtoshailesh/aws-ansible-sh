@@ -131,23 +131,53 @@ graph TD
 
 
 Part C:
-1. **Centralized Data Aggregation:**  
+#### **4\. Aggregating Data into a Single Format**
+
+To aggregate collected data into a single format:
+
+1. **Data Upload to S3:**  
      
-   - Collected metrics from EC2 instances across multiple AWS accounts are stored in a central **AWS S3 bucket** in the Management Account.  
-   - Data from S3 is queried using **AWS Athena** for on-demand analytics.
+   - Organize data in a structured format in the S3 bucket:  
+       
+     /account-id/instance-id/disk\_usage.txt
 
-   
-
-2. **Scalable Multi-Account Access:**  
      
-   - **AWS Organizations** manages multiple accounts, and **IAM roles** enable cross-account access.  
-   - **Ansible Playbook** is used to automate disk utilization data collection.
-
-   
-
-3. **Visualization and Reporting:**  
+2. **Data Query with Athena:**  
      
-   - Aggregated data can be visualized using **Amazon QuickSight** or exported for further analysis.
+   - Create a table in Athena to read and query data from S3:  
+       
+     CREATE EXTERNAL TABLE IF NOT EXISTS disk\_utilization (  
+       
+       account\_id STRING,  
+       
+       instance\_id STRING,  
+       
+       disk\_partition STRING,  
+       
+       total\_space STRING,  
+       
+       used\_space STRING,  
+       
+       available\_space STRING,  
+       
+       utilization\_percentage STRING  
+       
+     )  
+       
+     LOCATION 's3://central-metrics-bucket/metrics/';  
+       
+   - Run queries to aggregate data:  
+       
+     SELECT account\_id, instance\_id, utilization\_percentage  
+       
+     FROM disk\_utilization  
+       
+     WHERE utilization\_percentage \> 80;
+
+     
+3. **Visualization:**  
+     
+   - Connect Athena to QuickSight for trend analysis and custom dashboards.
 
 
 ```mermaid
