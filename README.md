@@ -424,7 +424,7 @@ Part G:
    * Assign the Management Account permissions to assume these roles.
 
 Example IAM Role Policy:
-
+```
  {  
   "Version": "2012-10-17",  
   "Statement": \[  
@@ -446,13 +446,14 @@ Example IAM Role Policy:
     }  
   \]  
 }
-
+```
 3.   
 4. **Ansible Inventory:**
 
    * Dynamically update the **inventory.yml** file to include new accounts and EC2 instances.
 
 Example inventory file:  
+```
  all:  
   children:  
     account\_1:  
@@ -462,23 +463,25 @@ Example inventory file:
     account\_2:  
       hosts:  
         ec2-3: { ansible\_host: 192.168.2.10, ansible\_user: ec2-user }
-
+```
 *   
 5. **S3 Bucket Structure:**
 
 Organize metrics by account and instance in the **S3 central bucket**:  
- /account-id/instance-id/disk\_usage.txt
-
+ ```
+/account-id/instance-id/disk\_usage.txt
+```
 *   
 6. **Athena for Querying:**
 
    * Athena queries automatically adapt as new data is uploaded.
 
 Example query:  
+```sql
  SELECT account\_id, instance\_id, utilization\_percentage  
 FROM disk\_utilization  
 WHERE utilization\_percentage \> 80;
-
+```
 *   
 7. **Visualization with QuickSight:**
 
@@ -494,8 +497,9 @@ WHERE utilization\_percentage \> 80;
 3. Update the Ansible inventory with the new account’s EC2 instances.
 
 Run the playbook:  
+```
  ansible-playbook \-i inventory.yml disk\_utilization\_monitoring.yml
-
+```
 4. 
 
 #### **Data Aggregation and Reporting**
@@ -528,25 +532,6 @@ Run the playbook:
    - Enforce IAM role least privilege.
    - Ensure S3 encryption and access logging.
 
----
 
-### **6. GitHub Repository Structure**
-For professional submission, structure your GitHub repository as follows:
-```
-aws-disk-monitoring/
-├── README.md                   # Detailed explanation of the solution
-├── inventory.yml               # Ansible inventory file
-├── disk_monitoring.yml         # Ansible playbook
-├── diagrams/
-│   └── architecture.png        # High-level architecture diagram
-├── policies/
-│   └── iam_role_policy.json    # IAM Role Policy for child accounts
-├── sql/
-│   └── athena_queries.sql      # Example Athena queries
-```
-
-- Include a **README.md** with setup instructions, explanation of components, and security measures.
-
----
 
 
