@@ -104,14 +104,14 @@ Part F:
 ```mermaid
 graph TD
   %% Root Account and Organization Setup
-  ROOT[Root Account]:::root --> M[Management Account<br>(Ansible Automation)]:::management
-  ROOT --> OU[Organizational Unit (OU)]:::ou
+  ROOT[Root Account]:::root --> M[Management Account<br>Ansible Automation]:::management
+  ROOT --> OU[Organizational Unit OU]:::ou
   OU --> CA1[Child Account 1]:::child
   OU --> CA2[Child Account 2]:::child
   OU --> CA3[Child Account 3]:::child
 
   %% Management Account Automation
-  M -->|Runs Ansible Automation| EC2_ANSIBLE[Ansible EC2 Instance<br>(Metric Collection)]:::ansible
+  M -->|Runs Ansible Automation| EC2_ANSIBLE[Ansible EC2 Instance<br>Metric Collection]:::ansible
 
   %% Child Account EC2 and EBS Setup
   CA1 --> EC1[EC2 Instance 1<br>Disk Utilization: 40%]:::ec2 --> EBS1[EBS Volume 1<br>40% Utilization]:::ebs
@@ -119,11 +119,11 @@ graph TD
   CA3 --> EC3[EC2 Instance 3<br>Disk Utilization: 90%]:::ec2 --> EBS3[EBS Volume 3<br>90% Utilization]:::ebs
 
   %% Centralized Storage in Management Account
-  EC2_ANSIBLE -->|Captures Metrics| S3[S3 Central Bucket<br>(Disk Metrics)]:::s3
+  EC2_ANSIBLE -->|Captures Metrics| S3[S3 Central Bucket<br>Disk Metrics]:::s3
 
   %% Data Analytics and Visualization
-  S3 -->|Query Metrics| ATHENA[AWS Athena<br>(Query Engine)]:::athena
-  ATHENA -->|Visualize Data| VISUAL[Amazon QuickSight/Power BI<br>(Dashboards)]:::visualization
+  S3 -->|Query Metrics| ATHENA[AWS Athena<br>Query Engine]:::athena
+  ATHENA -->|Visualize Data| VISUAL[Amazon QuickSight/Power BI<br>Dashboards]:::visualization
 
   %% Styles for Clarity
   style ROOT fill:#F5CBA7,stroke:#DC7633,stroke-width:2px
