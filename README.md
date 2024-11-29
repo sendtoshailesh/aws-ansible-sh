@@ -1,4 +1,4 @@
-**Case study : Multi-Account AWS EC2 Disk Utilization Monitoring**
+***Case study : Multi-Account AWS EC2 Disk Utilization Monitoring***
 
 **Background:**
 You are a Solutions architect at a large enterprise that utilizes AWS cloud services. The company has grown through acquisitions and now manages 3 separate AWS accounts, each containing numerous EC2 instances. The CTO has expressed concerns about potential disk space issues across these instances and wants a comprehensive solution to monitor disk utilization.
