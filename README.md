@@ -89,17 +89,28 @@ graph TD
   F -->|Runs Tasks| G[Roles and Tasks]
   G -->|Targets EC2 Instances| H[Managed Nodes]
 
+  %% Labels for clarity
+  style A fill:#D5F5E3,stroke:#27AE60,stroke-width:2px
+  style C fill:#FADBD8,stroke:#E74C3C,stroke-width:2px
+  style B fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px
+  style D fill:#D4E6F1,stroke:#3498DB,stroke-width:2px
+  style E fill:#FDEBD0,stroke:#F39C12,stroke-width:2px
+  style F fill:#D6DBDF,stroke:#5D6D7E,stroke-width:2px
+  style G fill:#F9E79F,stroke:#F1C40F,stroke-width:2px
+  style H fill:#F5CBA7,stroke:#DC7633,stroke-width:2px
+
+  %% Additional notes
+  B:::config Update Ansible configuration.
+  D:::inventory Hosts are defined here.
+  F:::playbook Central logic is executed here.
+  G:::roles Includes automation tasks.
+
  
 ```
 
 
 Part D:
 
-
-![basic architecture ](diagrams/multi-account.png)
-
-
-Part F:
 
 ```mermaid
 graph TD
