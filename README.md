@@ -56,26 +56,6 @@ graph TD
 
 Part B: 
 
-
-```mermaid
-graph TD
-  A[AWS Organizations] --> B(Management Account)
-  B -->|Assume IAM Role| C[Child Account 1]
-  B -->|Assume IAM Role| D[Child Account 2]
-  B -->|Assume IAM Role| E[Child Account 3]
-  C -->|Ansible Executes| F[EC2 Instances]
-  D -->|Ansible Executes| G[EC2 Instances]
-  E -->|Ansible Executes| H[EC2 Instances]
-  F -->|Push Metrics| I[S3 Central Bucket]
-  G -->|Push Metrics| I[S3 Central Bucket]
-  H -->|Push Metrics| I[S3 Central Bucket]
-  I --> J[AWS Athena]
-  J --> K[Amazon QuickSight]
-  J --> L[Custom Dashboard]
-```
-
-Part C:
-
 ```mermaid
 graph TD
   A[AWS Organizations] --> B(Management Account)
@@ -95,7 +75,9 @@ graph TD
   L --> M[Amazon QuickSight]
 ```
 
-Part D:
+
+
+Part C:
 
 ```mermaid
 graph TD
@@ -117,12 +99,11 @@ graph TD
   style G fill:#F9E79F,stroke:#F1C40F,stroke-width:2px
   style H fill:#F5CBA7,stroke:#DC7633,stroke-width:2px
 
-  %% Additional notes
-  B:::config Update Ansible configuration.
-  D:::inventory Hosts are defined here.
-  F:::playbook Central logic is executed here.
-  G:::roles Includes automation tasks.
 ```
+
+
+Part D:
+
 
 Part E: 
 
