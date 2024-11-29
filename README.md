@@ -47,7 +47,18 @@ Part A: Considering only 3 EC2 instance each dstributed across different AWS acc
 - **Scaling** by adhering to modular design principles and leveraging AWS native tools.
 
 ---
+Part B: 
 
+#### **2\. High-Level Architectural Diagram**
+
+The architectural diagram includes the following components:
+
+- **AWS Organizations** for centralized account management.  
+- **IAM Roles** with policies for secure cross-account access.  
+- **Ansible** for metric collection and automation.  
+- **AWS S3** for centralized data storage.  
+- **AWS Athena** for querying aggregated data.  
+- **Amazon QuickSight** (optional) for visualizing disk utilization metrics.
 
 ```mermaid
 graph TD
@@ -65,18 +76,7 @@ graph TD
   J --> K[Amazon QuickSight]
 ```
 
-Part B: 
 
-#### **2\. High-Level Architectural Diagram**
-
-The architectural diagram includes the following components:
-
-- **AWS Organizations** for centralized account management.  
-- **IAM Roles** with policies for secure cross-account access.  
-- **Ansible** for metric collection and automation.  
-- **AWS S3** for centralized data storage.  
-- **AWS Athena** for querying aggregated data.  
-- **Amazon QuickSight** (optional) for visualizing disk utilization metrics.
 
 
 
