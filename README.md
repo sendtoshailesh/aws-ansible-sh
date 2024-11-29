@@ -412,7 +412,7 @@ Example IAM Role Policy:
     {  
       "Effect": "Allow",  
       "Principal": {  
-        "AWS": "arn:aws:iam::MANAGEMENT\_ACCOUNT\_ID:root"  
+        "AWS": "arn:aws:iam::MANAGEMENT_ACCOUNT_ID:root"  
       },  
       "Action": "sts:AssumeRole"  
     },  
@@ -438,11 +438,11 @@ Example inventory file:
   children:  
     account_1:  
       hosts:  
-        ec2-1: { ansible\_host: 192.168.1.10, ansible_user: ec2-user }  
-        ec2-2: { ansible\_host: 192.168.1.11, ansible_user: ec2-user }  
+        ec2-1: { ansible_host: 192.168.1.10, ansible_user: ec2-user }  
+        ec2-2: { ansible_host: 192.168.1.11, ansible_user: ec2-user }  
     account_2:  
       hosts:  
-        ec2-3: { ansible\_host: 192.168.2.10, ansible_user: ec2-user }
+        ec2-3: { ansible_host: 192.168.2.10, ansible_user: ec2-user }
 ```
 4. **S3 Bucket Structure:**
 
@@ -459,7 +459,7 @@ Example query:
 ```sql
  SELECT account_id, instance_id, utilization_percentage  
 FROM disk_utilization  
-WHERE utilization_percentage \> 80;
+WHERE utilization_percentage > 80;
 ```
    
 6. **Visualization with QuickSight:**
