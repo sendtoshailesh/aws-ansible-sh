@@ -104,7 +104,7 @@ graph TD
 
 
 
-#### Aggregating Data into a Single Format**
+#### Aggregating Data into a Single Format
 
 To aggregate collected data into a single format:
 
@@ -231,6 +231,7 @@ graph TD
 
 
 ---
+
 
 ### **2. Ansible Playbook**
 
@@ -425,9 +426,8 @@ Example IAM Role Policy:
     }  
   ]  
 }
-```
-3.   
-4. **Ansible Inventory:**
+```  
+3. **Ansible Inventory:**
 
    * Dynamically update the **inventory.yml** file to include new accounts and EC2 instances.
 
@@ -443,15 +443,14 @@ Example inventory file:
       hosts:  
         ec2-3: { ansible\_host: 192.168.2.10, ansible_user: ec2-user }
 ```
-*   
-5. **S3 Bucket Structure:**
+4. **S3 Bucket Structure:**
 
 Organize metrics by account and instance in the **S3 central bucket**:  
  ```
 /account-id/instance-id/disk_usage.txt
 ```
-*   
-6. **Athena for Querying:**
+ 
+5. **Athena for Querying:**
 
    * Athena queries automatically adapt as new data is uploaded.
 
@@ -461,8 +460,8 @@ Example query:
 FROM disk_utilization  
 WHERE utilization_percentage \> 80;
 ```
-*   
-7. **Visualization with QuickSight:**
+   
+6. **Visualization with QuickSight:**
 
    * Dashboards dynamically display data as new accounts and metrics are added.
 
@@ -479,7 +478,6 @@ Run the playbook:
 ```
  ansible-playbook -i inventory.yml disk_utilization_monitoring.yml
 ```
-4. 
 
 #### **Data Aggregation and Reporting**
 
