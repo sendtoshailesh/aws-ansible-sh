@@ -99,11 +99,6 @@ graph TD
   style G fill:#F9E79F,stroke:#F1C40F,stroke-width:2px
   style H fill:#F5CBA7,stroke:#DC7633,stroke-width:2px
 
-  %% Additional notes
-  B:::config Update Ansible configuration.
-  D:::inventory Hosts are defined here.
-  F:::playbook Central logic is executed here.
-  G:::roles Includes automation tasks.
 
  
 ```
