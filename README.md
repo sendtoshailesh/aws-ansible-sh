@@ -126,22 +126,22 @@ graph TD
   ATHENA -->|Visualize Data| VISUAL[Amazon QuickSight/Power BI<br>Dashboards]:::visualization
 
   %% Styles for Clarity
-  style ROOT fill:#F5CBA7,stroke:#DC7633,stroke-width:2px
-  style M fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px
-  style OU fill:#D5F5E3,stroke:#27AE60,stroke-width:2px
-  style CA1 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px
-  style CA2 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px
-  style CA3 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px
-  style EC1 fill:#FEF9E7,stroke:#F4D03F,stroke-width:2px
-  style EC2 fill:#FEF9E7,stroke:#F4D03F,stroke-width:2px
-  style EC3 fill:#FEF9E7,stroke:#F4D03F,stroke-width:2px
-  style EBS1 fill:#FCF3CF,stroke:#F1C40F,stroke-width:2px
-  style EBS2 fill:#FCF3CF,stroke:#F1C40F,stroke-width:2px
-  style EBS3 fill:#FCF3CF,stroke:#F1C40F,stroke-width:2px
-  style EC2_ANSIBLE fill:#D6EAF8,stroke:#5DADE2,stroke-width:2px
-  style S3 fill:#D5F5E3,stroke:#27AE60,stroke-width:2px
-  style ATHENA fill:#FCF3CF,stroke:#F4D03F,stroke-width:2px
-  style VISUAL fill:#FADBD8,stroke:#E74C3C,stroke-width:2px
+  style ROOT fill:#F5CBA7,stroke:#DC7633,stroke-width:2px,color:black
+  style M fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px,color:black
+  style OU fill:#D5F5E3,stroke:#27AE60,stroke-width:2px,color:black
+  style CA1 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px,color:black
+  style CA2 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px,color:black
+  style CA3 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px,color:black
+  style EC1 fill:#FEF9E7,stroke:#F4D03F,stroke-width:2px,color:black
+  style EC2 fill:#FEF9E7,stroke:#F4D03F,stroke-width:2px,color:black
+  style EC3 fill:#FEF9E7,stroke:#F4D03F,stroke-width:2px,color:black
+  style EBS1 fill:#FCF3CF,stroke:#F1C40F,stroke-width:2px,color:black
+  style EBS2 fill:#FCF3CF,stroke:#F1C40F,stroke-width:2px,color:black
+  style EBS3 fill:#FCF3CF,stroke:#F1C40F,stroke-width:2px,color:black
+  style EC2_ANSIBLE fill:#D6EAF8,stroke:#5DADE2,stroke-width:2px,color:black
+  style S3 fill:#D5F5E3,stroke:#27AE60,stroke-width:2px,color:black
+  style ATHENA fill:#FCF3CF,stroke:#F4D03F,stroke-width:2px,color:black
+  style VISUAL fill:#FADBD8,stroke:#E74C3C,stroke-width:2px,color:black
 ```
 
 Part G:
