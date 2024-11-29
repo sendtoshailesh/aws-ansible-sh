@@ -1,0 +1,31 @@
+all:
+  children:
+    management_account:
+      hosts:
+        ansible-ec2-instance:
+          ansible_host: 10.0.0.1
+          ansible_user: ec2-user
+          ansible_ssh_private_key_file: ~/.ssh/management_account_key.pem
+
+    child_accounts:
+      children:
+        child_account_1:
+          hosts:
+            ec2-instance-1:
+              ansible_host: 10.1.0.10
+              ansible_user: ec2-user
+              ansible_ssh_private_key_file: ~/.ssh/child_account_1_key.pem
+
+        child_account_2:
+          hosts:
+            ec2-instance-2:
+              ansible_host: 10.2.0.20
+              ansible_user: ec2-user
+              ansible_ssh_private_key_file: ~/.ssh/child_account_2_key.pem
+
+        child_account_3:
+          hosts:
+            ec2-instance-3:
+              ansible_host: 10.3.0.30
+              ansible_user: ec2-user
+              ansible_ssh_private_key_file: ~/.ssh/child_account_3_key.pem
