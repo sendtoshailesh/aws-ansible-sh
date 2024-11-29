@@ -38,28 +38,50 @@ The architecture centralizes access and management using **AWS Organizations** a
 
 Part A: Considering only 3 EC2 instance each dstributed across different AWS account, following will be the flow of control.
 
-#### **3\. Key Components of the Solution**
+#### **3\. Key Components of the Solution**#### **3\. Components of the Solution**
 
-1. **Centralized Access and Management:**  
+1. **AWS Organizations:**  
      
-   - Set up **AWS Organizations** to link all accounts.  
-   - Use a **Management Account** to assume roles in other accounts using IAM policies.  
-   - Enable **AWS Config** and **CloudTrail** for auditing and governance.
+   - Centralized multi-account management ensures seamless scalability.  
+   - Allows the Management Account to assume roles in child accounts for metric collection.
 
    
 
-2. **Data Aggregation:**  
+2. **IAM Roles:**  
      
-   - EC2 instances send disk utilization metrics (collected via Ansible) to **S3** in the Management Account.  
-   - Configure **S3 Lifecycle Policies** for cost-effective storage.  
-   - Use **AWS Athena** to run queries and generate reports.
+   - Cross-account access is enabled by creating IAM roles in child accounts with policies that permit EC2 instance interaction and S3 uploads.
 
    
 
-3. **Scaling for Future Accounts:**  
+3. **Ansible Playbook:**  
      
-   - Automate the inclusion of new accounts by extending AWS Organizations and updating IAM roles.  
-   - Design the Ansible playbook to dynamically retrieve account details and EC2 inventory using AWS CLI.
+   - Automates the collection of disk utilization data and uploads it to a centralized S3 bucket.
+
+   
+
+4. **AWS S3:**  
+     
+   - Stores the raw data collected from EC2 instances in a structured format (e.g., by account and instance IDs).
+
+   
+
+5. **AWS Athena:**  
+     
+   - Allows querying of aggregated data directly from S3 using SQL-like syntax for easy analysis.
+
+   
+
+6. **Amazon QuickSight:**  
+     
+   - Visualizes disk utilization trends and generates insights from aggregated data.
+
+   
+
+7. **Security Considerations:**  
+     
+   - All S3 uploads use IAM roles to avoid hardcoding credentials.  
+   - Data in S3 is encrypted using server-side encryption (SSE).
+
 
 
 ---
