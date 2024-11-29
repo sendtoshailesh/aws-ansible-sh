@@ -36,6 +36,8 @@ This document provides a comprehensive solution to centralize access and managem
 
 The architecture centralizes access and management using **AWS Organizations** and **IAM Roles**. It ensures secure and scalable data aggregation from multiple AWS accounts.
 
+Part A: Considering only 3 EC2 instance each dstributed across different AWS account, following will be the flow of control.
+
 ```mermaid
 graph TD
   A[AWS Organizations] --> B(Management Account)
@@ -50,6 +52,162 @@ graph TD
   H -->|Push Metrics| I[S3 Central Bucket]
   I --> J[AWS Athena]
   J --> K[Amazon QuickSight]
+```
+
+Part B: 
+
+
+```mermaid
+graph TD
+  A[AWS Organizations] --> B(Management Account)
+  B -->|Assume IAM Role| C[Child Account 1]
+  B -->|Assume IAM Role| D[Child Account 2]
+  B -->|Assume IAM Role| E[Child Account 3]
+  C -->|Ansible Executes| F[EC2 Instances]
+  D -->|Ansible Executes| G[EC2 Instances]
+  E -->|Ansible Executes| H[EC2 Instances]
+  F -->|Push Metrics| I[S3 Central Bucket]
+  G -->|Push Metrics| I[S3 Central Bucket]
+  H -->|Push Metrics| I[S3 Central Bucket]
+  I --> J[AWS Athena]
+  J --> K[Amazon QuickSight]
+  J --> L[Custom Dashboard]
+```
+
+Part C:
+
+```mermaid
+graph TD
+  A[AWS Organizations] --> B(Management Account)
+  B -->|Assume IAM Role| C[Child Account 1]
+  B -->|Assume IAM Role| D[Child Account 2]
+  B -->|Assume IAM Role| E[Child Account 3]
+  B -->|Add New IAM Role| F[Newly Acquired Account]
+  C -->|Ansible Executes| G[EC2 Instances]
+  D -->|Ansible Executes| H[EC2 Instances]
+  E -->|Ansible Executes| I[EC2 Instances]
+  F -->|Ansible Executes| J[EC2 Instances]
+  G -->|Push Metrics| K[S3 Central Bucket]
+  H -->|Push Metrics| K[S3 Central Bucket]
+  I -->|Push Metrics| K[S3 Central Bucket]
+  J -->|Push Metrics| K[S3 Central Bucket]
+  K --> L[AWS Athena]
+  L --> M[Amazon QuickSight]
+```
+
+Part D:
+
+```mermaid
+graph TD
+  A[New AWS Account or EC2 Instances] -->|Account Added| B[Update Ansible Inventory]
+  C[Existing Account or EC2 Instances] -->|Account Deleted| B
+  B -->|Add/Remove Hosts| D[Inventory File]
+  D -->|Updates Reflected| E[Dynamic Host Groups]
+  E -->|Uses Updated Inventory| F[Ansible Playbook]
+  F -->|Runs Tasks| G[Roles and Tasks]
+  G -->|Targets EC2 Instances| H[Managed Nodes]
+
+  %% Labels for clarity
+  style A fill:#D5F5E3,stroke:#27AE60,stroke-width:2px
+  style C fill:#FADBD8,stroke:#E74C3C,stroke-width:2px
+  style B fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px
+  style D fill:#D4E6F1,stroke:#3498DB,stroke-width:2px
+  style E fill:#FDEBD0,stroke:#F39C12,stroke-width:2px
+  style F fill:#D6DBDF,stroke:#5D6D7E,stroke-width:2px
+  style G fill:#F9E79F,stroke:#F1C40F,stroke-width:2px
+  style H fill:#F5CBA7,stroke:#DC7633,stroke-width:2px
+
+  %% Additional notes
+  B:::config Update Ansible configuration.
+  D:::inventory Hosts are defined here.
+  F:::playbook Central logic is executed here.
+  G:::roles Includes automation tasks.
+```
+
+Part E: 
+
+```mermaid
+graph TD
+  %% Nodes
+  A[Management Account]:::management -->|Runs Ansible Automation| B[Ansible EC2 Instance]:::ansible
+  subgraph Child Accounts
+    C1[Child Account 1]:::child --> E1[EC2 Instance 1<br>Disk Utilization: 40%]:::ec2 --> D1[EBS Volume 1<br>Disk Usage: 40%]:::ebs
+    C2[Child Account 2]:::child --> E2[EC2 Instance 2<br>Disk Utilization: 70%]:::ec2 --> D2[EBS Volume 2<br>Disk Usage: 70%]:::ebs
+    C3[Child Account 3]:::child --> E3[EC2 Instance 3<br>Disk Utilization: 90%]:::ec2 --> D3[EBS Volume 3<br>Disk Usage: 90%]:::ebs
+  end
+  B -->|Captures Disk Metrics| F[S3 Central Bucket]:::s3
+  F -->|Query Data| G[AWS Athena]:::athena
+  G -->|Visualize Data| H[Amazon QuickSight/Power BI]:::visualization
+
+  %% Labels for clarity
+  style A fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px
+  style B fill:#D6EAF8,stroke:#5DADE2,stroke-width:2px
+  style F fill:#D5F5E3,stroke:#27AE60,stroke-width:2px
+  style G fill:#FCF3CF,stroke:#F4D03F,stroke-width:2px
+  style H fill:#FADBD8,stroke:#E74C3C,stroke-width:2px
+
+  %% Child accounts and resources
+  style C1 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px
+  style C2 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px
+  style C3 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px
+  style E1 fill:#FDEDEC,stroke:#CB4335,stroke-width:2px
+  style E2 fill:#FEF9E7,stroke:#F1C40F,stroke-width:2px
+  style E3 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px
+  style D1 fill:#FDEDEC,stroke:#CB4335,stroke-width:2px
+  style D2 fill:#FEF9E7,stroke:#F1C40F,stroke-width:2px
+  style D3 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px
+```
+
+
+Part F:
+
+```mermaid
+graph TD
+  %% Root Account and Organization Setup
+  ROOT[Root Account]:::root --> M[Management Account<br>(Ansible Automation)]:::management
+  ROOT --> OU[Organizational Unit (OU)]:::ou
+  OU --> CA1[Child Account 1]:::child
+  OU --> CA2[Child Account 2]:::child
+  OU --> CA3[Child Account 3]:::child
+
+  %% Management Account Automation
+  M -->|Runs Ansible Automation| EC2_ANSIBLE[Ansible EC2 Instance<br>(Metric Collection)]:::ansible
+
+  %% Child Account EC2 and EBS Setup
+  CA1 --> EC1[EC2 Instance 1<br>Disk Utilization: 40%]:::ec2 --> EBS1[EBS Volume 1<br>40% Utilization]:::ebs
+  CA2 --> EC2[EC2 Instance 2<br>Disk Utilization: 70%]:::ec2 --> EBS2[EBS Volume 2<br>70% Utilization]:::ebs
+  CA3 --> EC3[EC2 Instance 3<br>Disk Utilization: 90%]:::ec2 --> EBS3[EBS Volume 3<br>90% Utilization]:::ebs
+
+  %% Centralized Storage in Management Account
+  EC2_ANSIBLE -->|Captures Metrics| S3[S3 Central Bucket<br>(Disk Metrics)]:::s3
+
+  %% Data Analytics and Visualization
+  S3 -->|Query Metrics| ATHENA[AWS Athena<br>(Query Engine)]:::athena
+  ATHENA -->|Visualize Data| VISUAL[Amazon QuickSight/Power BI<br>(Dashboards)]:::visualization
+
+  %% Styles for Clarity
+  style ROOT fill:#F5CBA7,stroke:#DC7633,stroke-width:2px
+  style M fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px
+  style OU fill:#D5F5E3,stroke:#27AE60,stroke-width:2px
+  style CA1 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px
+  style CA2 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px
+  style CA3 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px
+  style EC1 fill:#FEF9E7,stroke:#F4D03F,stroke-width:2px
+  style EC2 fill:#FEF9E7,stroke:#F4D03F,stroke-width:2px
+  style EC3 fill:#FEF9E7,stroke:#F4D03F,stroke-width:2px
+  style EBS1 fill:#FCF3CF,stroke:#F1C40F,stroke-width:2px
+  style EBS2 fill:#FCF3CF,stroke:#F1C40F,stroke-width:2px
+  style EBS3 fill:#FCF3CF,stroke:#F1C40F,stroke-width:2px
+  style EC2_ANSIBLE fill:#D6EAF8,stroke:#5DADE2,stroke-width:2px
+  style S3 fill:#D5F5E3,stroke:#27AE60,stroke-width:2px
+  style ATHENA fill:#FCF3CF,stroke:#F4D03F,stroke-width:2px
+  style VISUAL fill:#FADBD8,stroke:#E74C3C,stroke-width:2px
+```
+
+Part G:
+
+```mermaid
+
 ```
 
 ---
