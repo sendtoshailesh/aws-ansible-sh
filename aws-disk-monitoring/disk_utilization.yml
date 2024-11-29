@@ -1,0 +1,51 @@
+---
+# Playbook: disk_utilization.yml
+# Description: Automates the collection of disk utilization metrics from EC2 instances across multiple AWS accounts,
+#              and uploads the data to a centralized S3 bucket for aggregation and analysis.
+
+- name: Multi-Account EC2 Disk Utilization Monitoring
+  hosts: all
+  gather_facts: false
+  tasks:
+    # Task 1: Ensure AWS CLI is installed on the EC2 instances
+    - name: Install AWS CLI
+      yum:
+        name: aws-cli
+        state: present
+      when: ansible_distribution == "Amazon"  # Ensure the task is only applied to Amazon Linux
+
+    # Task 2: Collect Disk Utilization Metrics
+    - name: Collect Disk Utilization Metrics
+      shell: |
+        df -h | grep '^/dev/' > /tmp/disk_usage.txt
+      register: disk_utilization_output  # Store command output for validation
+      changed_when: false
+
+    # Task 3: Validate the Metrics File
+    - name: Verify Disk Utilization Metrics File
+      stat:
+        path: /tmp/disk_usage.txt
+      register: metrics_file  # Check if the file exists on the managed nodes
+
+    # Task 4: Upload Metrics to Centralized S3 Bucket
+    - name: Upload Disk Utilization Metrics to S3
+      aws_s3:
+        bucket: central-metrics-bucket  # S3 bucket in the management account
+        object: "metrics/{{ inventory_hostname }}_disk_usage.txt"  # File naming convention
+        src: /tmp/disk_usage.txt
+        mode: put
+        region: us-east-1
+      when: metrics_file.stat.exists  # Only proceed if the metrics file exists
+
+    # Task 5: Clean Up Temporary Files
+    - name: Remove Temporary Metrics File
+      file:
+        path: /tmp/disk_usage.txt
+        state: absent
+      when: metrics_file.stat.exists  # Only proceed if the file exists
+
+# Notes:
+# - Ensure the Ansible control node has access to the private keys specified in the inventory file.
+# - Replace "central-metrics-bucket" with the actual bucket name in your AWS environment.
+# - Test connectivity to all hosts in the inventory before running the playbook using the command:
+#   ansible all -i inventory.yml -m ping
