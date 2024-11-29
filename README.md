@@ -96,41 +96,6 @@ graph TD
 Part D:
 
 
-Part E: 
-
-```mermaid
-graph TD
-  %% Nodes
-  A[Management Account]:::management -->|Runs Ansible Automation| B[Ansible EC2 Instance]:::ansible
-  subgraph Child Accounts
-    C1[Child Account 1]:::child --> E1[EC2 Instance 1<br>Disk Utilization: 40%]:::ec2 --> D1[EBS Volume 1<br>Disk Usage: 40%]:::ebs
-    C2[Child Account 2]:::child --> E2[EC2 Instance 2<br>Disk Utilization: 70%]:::ec2 --> D2[EBS Volume 2<br>Disk Usage: 70%]:::ebs
-    C3[Child Account 3]:::child --> E3[EC2 Instance 3<br>Disk Utilization: 90%]:::ec2 --> D3[EBS Volume 3<br>Disk Usage: 90%]:::ebs
-  end
-  B -->|Captures Disk Metrics| F[S3 Central Bucket]:::s3
-  F -->|Query Data| G[AWS Athena]:::athena
-  G -->|Visualize Data| H[Amazon QuickSight/Power BI]:::visualization
-
-  %% Labels for clarity
-  style A fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px
-  style B fill:#D6EAF8,stroke:#5DADE2,stroke-width:2px
-  style F fill:#D5F5E3,stroke:#27AE60,stroke-width:2px
-  style G fill:#FCF3CF,stroke:#F4D03F,stroke-width:2px
-  style H fill:#FADBD8,stroke:#E74C3C,stroke-width:2px
-
-  %% Child accounts and resources
-  style C1 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px
-  style C2 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px
-  style C3 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px
-  style E1 fill:#FDEDEC,stroke:#CB4335,stroke-width:2px
-  style E2 fill:#FEF9E7,stroke:#F1C40F,stroke-width:2px
-  style E3 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px
-  style D1 fill:#FDEDEC,stroke:#CB4335,stroke-width:2px
-  style D2 fill:#FEF9E7,stroke:#F1C40F,stroke-width:2px
-  style D3 fill:#E8F8F5,stroke:#1ABC9C,stroke-width:2px
-```
-
-
 Part F:
 
 ```mermaid
