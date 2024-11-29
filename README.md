@@ -62,7 +62,7 @@ The playbook:
 2. Fetches disk utilization metrics.
 3. Uploads metrics to a centralized S3 bucket in the Management Account.
 
-#### **Playbook: `disk_monitoring.yml`**
+#### **Playbook: `aws-disk-monitoring/disk_monitoring.yml`**
 
 ```yaml
 ---
