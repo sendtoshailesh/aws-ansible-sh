@@ -26,9 +26,22 @@ Deliverables :
 
 ```
 
+## Table of Contents
+1. [Background and Problem Statement](#background-and-problem-statement)
+2. [Proposed Solution Overview](#proposed-solution-overview)
+3. [High-Level Architecture](#high-level-architecture)
+4. [Technical Implementation](#technical-implementation)
+5. [Scalability and Security](#scalability-and-security)
+6. [Conclusion](#conclusion)
+
+
+#background-and-problem-statement
 ### Centralized Access and Management of Multi-Account AWS EC2 Disk Utilization Monitoring
 
-This document provides a comprehensive solution to centralize access and management of three AWS accounts, automate data collection using Ansible, and aggregate the data into a digestible format.
+This case study presents a scalable and cost-effective solution for monitoring EC2 disk utilization across multiple AWS accounts using AWS-native tools and Ansible automation. The architecture ensures centralized management, seamless scalability, and actionable insights through data visualization.
+
+
+
 
 ---
 
