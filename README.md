@@ -39,16 +39,22 @@ Deliverables :
 ```
 
 
+## Proposed Solution Overview
+This section provides an overview of the proposed solution.
 
-#background-and-problem-statement
 ### Centralized Access and Management of Multi-Account AWS EC2 Disk Utilization Monitoring
 
 This case study presents a scalable and cost-effective solution for monitoring EC2 disk utilization across multiple AWS accounts using AWS-native tools and Ansible automation. The architecture ensures centralized management, seamless scalability, and actionable insights through data visualization.
 
 
-
+- Centralized multi-account management with AWS Organizations.
+- Cross-account data collection using IAM roles and Ansible.
+- Scalable architecture to accommodate new accounts seamlessly.
+- Secure data storage and analysis using AWS S3, Athena, and QuickSight.
 
 ---
+## High-Level Architecture
+This section includes the architectural diagram and key components.
 
 ### **1. High-Level Architectural Diagram**
 
@@ -203,11 +209,24 @@ graph TD
 
 
 ---
-
+## Technical Implementation
+Details about the Ansible playbook, AWS configuration, and data aggregation.
 
 ### **2. Ansible Playbook**
 
 #### **Playbook Overview**
+
+Prerequisites:
+
+AWS CLI installed and configured with appropriate credentials.
+Ansible installed with version x.x.x or above.
+Sample Output:
+After running the playbook, metrics will be uploaded to the specified S3 bucket. Example S3 folder structure:
+```bash
+s3://central-metrics-bucket/account-id/instance-id/disk_usage.txt
+```
+
+
 **Steps in the Playbook:**
 
 1. **Install AWS CLI:** Ensures the managed nodes have the necessary tool to interact with AWS services.  
@@ -385,6 +404,9 @@ graph TD
 
 ---
 
+## Scalability and Security
+Discusses how the solution scales and ensures data security.
+
 ### **3\. Scalability Summary**
 
 #### **Scaling Approach**
@@ -498,11 +520,41 @@ Run the playbook:
  ansible-playbook -i inventory.yml disk_utilization_monitoring.yml
 ```
 
+
+Scaling Example:
+If the organization acquires a new account, you simply:
+
+a. Add the account to AWS Organizations.
+b. Configure a new IAM role for the Management Account.
+c. Update the Ansible inventory file.
+d. The rest of the workflow remains automated.
+
+Simplify IAM Role Policy
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstances",
+        "s3:PutObject"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+```
+
 #### **Data Aggregation and Reporting**
 
 * Metrics from the new account are automatically uploaded to the S3 bucket.  
 * Athena queries dynamically include new data for reporting.  
 * Dashboards in QuickSight automatically refresh with updated data.
+
+## Conclusion
+This solution offers a robust framework for centralized disk utilization monitoring across multiple AWS accounts. By leveraging Ansible and AWS-native tools, it minimizes costs, ensures scalability, and provides actionable insights through data visualization.
 
 ### **5. Summary of Components**
 
