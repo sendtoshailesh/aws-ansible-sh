@@ -1,3 +1,13 @@
+# Multi-Account AWS EC2 Disk Utilization Monitoring
+
+![Ansible](https://img.shields.io/badge/ansible-v2.9.25-blue)
+![AWS Certified](https://img.shields.io/badge/AWS-Certified-orange)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Workflow Status](https://github.com/username/repo-name/actions/workflows/ci.yml/badge.svg)
+
+This project demonstrates a centralized solution for monitoring disk utilization across multiple AWS accounts using Ansible and AWS services.
+
+
 # ***Case study : Multi-Account AWS EC2 Disk Utilization Monitoring*** 
 
 ## Table of Contents
