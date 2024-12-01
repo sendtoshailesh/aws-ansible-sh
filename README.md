@@ -250,8 +250,8 @@ graph TD
 
 Prerequisites:
 
-AWS CLI installed and configured with appropriate credentials.
-Ansible installed with version x.x.x or above.
+Latest AWS CLI installed and configured with appropriate credentials.
+Ansible installed with version 2.9.1 or above.
 Sample Output:
 After running the playbook, metrics will be uploaded to the specified S3 bucket. Example S3 folder structure:
 ```bash
