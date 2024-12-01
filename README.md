@@ -1,4 +1,16 @@
 # ***Case study : Multi-Account AWS EC2 Disk Utilization Monitoring*** 
+
+## Table of Contents
+1. [Background and Problem Statement](#background-and-problem-statement)
+2. [Proposed Solution Overview](#proposed-solution-overview)
+3. [High-Level Architecture](#high-level-architecture)
+4. [Technical Implementation](#technical-implementation)
+5. [Scalability and Security](#scalability-and-security)
+6. [Conclusion](#conclusion)
+
+## Background and Problem Statement
+This section describes the problem statement and the context for the solution.
+
 ```
 Background:
 You are a Solutions architect at a large enterprise that utilizes AWS cloud services. The company has grown through acquisitions and now manages 3 separate AWS accounts, each containing numerous EC2 instances. The CTO has expressed concerns about potential disk space issues across these instances and wants a comprehensive solution to monitor disk utilization.
@@ -26,13 +38,6 @@ Deliverables :
 
 ```
 
-## Table of Contents
-1. [Background and Problem Statement](#background-and-problem-statement)
-2. [Proposed Solution Overview](#proposed-solution-overview)
-3. [High-Level Architecture](#high-level-architecture)
-4. [Technical Implementation](#technical-implementation)
-5. [Scalability and Security](#scalability-and-security)
-6. [Conclusion](#conclusion)
 
 
 #background-and-problem-statement
