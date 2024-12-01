@@ -210,7 +210,39 @@ graph TD
 
 ---
 ## Technical Implementation
-Details about the Ansible playbook, AWS configuration, and data aggregation.
+Details about the Ansible playbook, AWS configuration, and data aggregation. Here is step wise flow:
+
+1. Ansible Control Node: Starts the playbook execution.
+2. Ansible Inventory: Identifies the target EC2 instances from the inventory file.
+3. EC2 Instances: Ansible connects to each EC2 instance and executes tasks.
+4. Disk Utilization Metrics: Metrics are collected from EC2 instances and stored temporarily.
+5. Validation: Validates the collected data and prepares it for upload.
+6. S3 Bucket: Metrics are uploaded to a centralized S3 bucket.
+7. AWS Athena: Data in the S3 bucket is queried for analysis.
+8. Amazon QuickSight: Dashboards are generated for visualizing trends and metrics.
+
+```mermaid
+graph TD
+  A[Ansible Control Node] -->|Execute Playbook| B[Ansible Inventory]
+  B -->| Identify Target Hosts| C[EC2 Instances]
+  C -->| Connect to Instances| D[Run Tasks on EC2 Instances]
+  D -->| Collect Disk Utilization Metrics| E[Disk Usage Data /tmp/disk_usage.txt]
+  E -->| Validate and Process Data| F[Prepare Data for Upload]
+  F -->| Upload Metrics to Centralized S3 Bucket| G[S3 Bucket]
+  G -->| Metrics Available for Querying| H[AWS Athena]
+  H -->| Generate Dashboards| I[Amazon QuickSight]
+
+  %% Style Definitions
+  style A fill:#D4E6F1,stroke:#3498DB,stroke-width:2px,color:black
+  style B fill:#FDEBD0,stroke:#F39C12,stroke-width:2px,color:black
+  style C fill:#D5F5E3,stroke:#27AE60,stroke-width:2px,color:black
+  style D fill:#FCF3CF,stroke:#F4D03F,stroke-width:2px,color:black
+  style E fill:#F9EBEA,stroke:#E74C3C,stroke-width:2px,color:black
+  style F fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px,color:black
+  style G fill:#F2D7D5,stroke:#CB4335,stroke-width:2px,color:black
+  style H fill:#D6EAF8,stroke:#5DADE2,stroke-width:2px,color:black
+  style I fill:#FCF3CF,stroke:#F4D03F,stroke-width:2px,color:black
+```
 
 ### **2. Ansible Playbook**
 
