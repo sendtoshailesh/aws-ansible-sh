@@ -56,7 +56,7 @@ This case study presents a scalable and cost-effective solution for monitoring E
 ## High-Level Architecture
 This section includes the architectural diagram and key components.
 
-### **1. High-Level Architectural Diagram**
+### ** High-Level Architectural Diagram**
 
 The architecture centralizes access and management using **AWS Organizations** and **IAM Roles**. It ensures secure and scalable data aggregation from multiple AWS accounts.
 
@@ -244,7 +244,7 @@ graph TD
   style I fill:#FCF3CF,stroke:#F4D03F,stroke-width:2px,color:black
 ```
 
-### **2. Ansible Playbook**
+### ** Ansible Playbook**
 
 #### **Playbook Overview**
 
@@ -400,7 +400,7 @@ graph TD
 
 ---
 
-### **4. Aggregating Data into a Single Format**
+### ** Aggregating Data into a Single Format**
 
 #### **Centralized Data Aggregation**
 1. Collected metrics are uploaded to a centralized **S3 Bucket** in the Management Account.
